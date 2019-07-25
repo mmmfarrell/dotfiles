@@ -1,0 +1,61 @@
+#!/bin/bash
+# This Script downloads National Geographic Photo of the day, and sets it as desktop background (gnome, unity)
+# Copyright (C) 2012 Saman Barghi - All Rights Reserved
+# Permission to copy, modify, and distribute is granted under GPLv3
+# Last Revised 23 April 2017
+
+# instead of 'cinnamon-session|gnome-session|mate-session"',  'noutilus', or 'compiz' can be used
+# or the name of a process of a graphical program about that you are sure that is
+# running after you log in the X session
+#PID=$(pgrep -o "cinnamon-sess|gnome-sess|mate-sess")
+#export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+
+
+wget -q --spider http://google.com
+
+if [ $? -eq 0 ]; then
+    echo "Online"
+else
+    echo "Offline"
+fi
+
+##check for network
+#while [ -z "`curl -s --head https://google.com/ | head -n 1 | grep 'HTTP/1.[01]'`" ]
+#do
+	#echo "Network is down!!"
+  #sleep 1800
+#done
+#######################
+
+#Change directory to where the script resides.
+#BASEDIR=$(dirname $0)
+#cd $BASEDIR
+#######################
+
+#getting the image URL
+img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day/ -s | grep -oP '(?<="twitter:image:src" content=")\K[^"]*')"
+
+#check to see if there is any wallpaper to download
+if [ -n "$img" ]
+then
+    img_base=`echo $img | cut -d/ -f 5`
+    img_md5=`echo -n $img_base | md5sum | cut -f1 -d" "`
+    img_file="$HOME/Pictures/NatGeo/$img_md5.jpg"
+    echo $img_file
+
+  if [ -f "$img_file" ]
+  then
+    echo "File already exists"
+  else
+        curl "$img" > $img_file
+    #set the current image as wallpaper
+        #gsettings set org.gnome.desktop.background picture-uri "file://`pwd`/${img_file}"
+    convert $img_file -resize 3840x2160! $HOME/Pictures/lock.png
+    convert $img_file $HOME/Pictures/wallpaper.png
+    /usr/bin/feh --bg-scale $HOME/Pictures/wallpaper.png
+
+		echo "Wallpaper downloaded successfully and saved as $img_file"
+	fi
+else
+	echo "No Wallpaper today"
+fi
