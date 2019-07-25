@@ -1,0 +1,15 @@
+[user]
+    name = Michael Farrell
+    email = michaeldavidfarrell@gmail.com
+[push]
+	default = simple
+[alias]
+	co = checkout
+	st = status
+	ct = commit
+	subup = submodule update --init --recursive
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

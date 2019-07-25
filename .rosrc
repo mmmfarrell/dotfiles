@@ -1,0 +1,31 @@
+source set_ros_master local
+
+# Planck Wifi
+#source set_ros_master 192.168.1.122
+#export ROS_IP=192.168.1.143
+#export ROS_HOSTNAME=192.168.1.143
+
+#source set_ros_master 192.168.1.123
+#export ROS_IP=192.168.1.123
+#export ROS_HOSTNAME=192.168.1.123
+
+export ROSLAUNCH_SSH_UNKNOWN=1
+
+# ROS_WORKSPACE
+source /opt/ros/melodic/setup.bash
+
+#source ~/magicc/catkin_ws/devel/setup.bash
+#source ~/DeepTurtleControl/catkin_ws/devel/setup.bash
+
+# My aliases for ROS
+alias vros='vim ~/.rosrc'
+
+# Go to ros ws/src
+alias cdros="cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'`/src"
+
+# catkin make release mode from anywhere
+alias ros_make="(cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'` && catkin_make -DCMAKE_BUILD_TYPE=Release)"
+#alias ros_make="(cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'` && catkin_make -DCMAKE_BUILD_TYPE=Debug)"
+
+# This is for QtCreator
+alias fixCMake="rm CMakeLists.txt && cp /opt/ros/kinetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt"
