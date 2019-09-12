@@ -44,21 +44,6 @@ filetype indent on
 " Always copy and paste to clipboard
 set clipboard=unnamedplus
 
-" Use xclip for clipboard
-" sudo apt install xclip
-"let g:clipboard = {
-  "\   'name': 'xclip-xfce4-clipman',
-  "\   'copy': {
-  "\      '+': 'xclip -selection clipboard',
-  "\      '*': 'xclip -selection clipboard',
-  "\    },
-  "\   'paste': {
-  "\      '+': 'xclip -selection clipboard -o',
-  "\      '*': 'xclip -selection clipboard -o',
-  "\   },
-  "\   'cache_enabled': 1,
-  "\ }
-
 " Colorscheme
 set termguicolors
 let g:gruvbox_contrast_dark="hard"
@@ -116,19 +101,6 @@ autocmd FileType make set noexpandtab softtabstop=0
 autocmd FileType c setlocal ts=2 sw=2 expandtab
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType py setlocal ts=4 sw=4 expandtab
-
-"augroup cpp
-  "autocmd!
-  "" In c++ indents are 2 spaces
-  "set shiftwidth=2
-"augroup END
-
-"augroup py
-  "autocmd!
-  "" In python tab characters appear as 4 spaces, indents are 4 spaces
-  "set tabstop=4
-  "set shiftwidth=4
-"augroup END
 
 " Don't assume I want a line comment after another line comment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -211,7 +183,7 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 " Vim-ROS
 " Open .h/.cpp in a vsplit
-command! -nargs=0 AV exec ':vsplit | A'
+"command! -nargs=0 AV exec ':vsplit | A'
 
 " FZF
 " leader + f to search files
@@ -241,7 +213,7 @@ let g:airline_theme = "dark"
 " just after you start vim.
 let g:airline#extensions#tmuxline#enabled = 0
 
-" Make vimtex use xelatex
+" Make vimtex use zathura
 let g:vimtex_view_method = 'zathura'
 
 " Visual Increment
