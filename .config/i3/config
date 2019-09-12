@@ -15,7 +15,7 @@ set $mod1 Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -184,7 +184,7 @@ client.focused_inactive $inactive-bg-color $inactive-bg-color  $inactive-text-co
 client.urgent $urgent-bg-color $urgent-bg-color $text-color #F92672
 
 # Use polybar instead of i3
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
@@ -207,7 +207,10 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # lockscreen (make sure to scrot that desktop boi)
-bindsym $mod+$mod1+l exec i3lock -i $HOME/Pictures/lock.png
+#bindsym $mod+$mod1+l exec i3lock -i $HOME/Pictures/lock.png
+#bindsym $mod+$mod1+l exec $HOME/.config/i3/lock
+bindsym $mod+$mod1+l exec $HOME/.config/i3/my_lock.sh
+#bindsym $mod+$mod1+l exec SDL_VIDEO_FULLSCREEN_HEAD=0 i3lock -i $HOME/Pictures/lock.png
 
 # Background stored as wallpaper.png
 exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpaper.png
@@ -238,7 +241,8 @@ bindsym $mod+backslash scratchpad show
 # Exit or power button menu
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.config/i3/i3exit lock, mode "default"
+    #bindsym l exec --no-startup-id ~/.config/i3/i3exit lock, mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/my_lock.sh, mode "default"
     bindsym e exec --no-startup-id ~/.config/i3/i3exit logout, mode "default"
     bindsym s exec --no-startup-id ~/.config/i3/i3exit suspend, mode "default"
     bindsym h exec --no-startup-id ~/.config/i3/i3exit hibernate, mode "default"
@@ -263,12 +267,14 @@ bindsym $mod+ctrl+h move workspace to output left
 workspace_auto_back_and_forth yes
 
 # Screen saver
-exec --no-startup-id xautolock -time 5 -locker "i3lock -i $HOME/Pictures/lock.png" &
+#exec --no-startup-id xautolock -time 5 -locker "$HOME/.config/i3/lock" &
+exec --no-startup-id xautolock -time 5 -locker "$HOME/.config/i3/my_lock.sh" &
 exec --no-startup-id xautolock -time 10 -locker "~/.config/i3/i3exit suspend" &
 
 exec --no-startup-id i3-sensible-terminal -e tmux attach
 exec --no-startup-id xset r rate 300 20 # Set initial delay 300ms, repeat 20ms
 
-# Gaps if i3-gaps is installed
-#gaps inner 7 
-#smart_gaps on
+# Switching display settings
+bindsym $mod+F1 exec change_display ultrawide
+bindsym $mod+F2 exec change_display two_monitors
+bindsym $mod+F10 exec change_display laptop_only

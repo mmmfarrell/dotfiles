@@ -1,20 +1,21 @@
-source set_ros_master local
+# Local
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_IP=localhost
+export ROS_HOSTNAME=localhost
 
 # Planck Wifi
-#source set_ros_master 192.168.1.122
-#export ROS_IP=192.168.1.143
-#export ROS_HOSTNAME=192.168.1.143
+#export ROS_MASTER_URI=http://192.168.1.122:11311
+#export ROS_IP=192.168.1.149
+#export ROS_HOSTNAME=192.168.1.149
 
-#source set_ros_master 192.168.1.123
-#export ROS_IP=192.168.1.123
-#export ROS_HOSTNAME=192.168.1.123
+echo ROS_MASTER_URI = $ROS_MASTER_URI
 
 export ROSLAUNCH_SSH_UNKNOWN=1
 
 # ROS_WORKSPACE
 source /opt/ros/melodic/setup.bash
 
-#source ~/magicc/catkin_ws/devel/setup.bash
+source ~/magicc/catkin_ws/devel/setup.bash
 #source ~/DeepTurtleControl/catkin_ws/devel/setup.bash
 
 # My aliases for ROS
@@ -28,4 +29,4 @@ alias ros_make="(cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'` && catkin
 #alias ros_make="(cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'` && catkin_make -DCMAKE_BUILD_TYPE=Debug)"
 
 # This is for QtCreator
-alias fixCMake="rm CMakeLists.txt && cp /opt/ros/kinetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt"
+#alias fixCMake="rm CMakeLists.txt && cp /opt/ros/kinetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt"

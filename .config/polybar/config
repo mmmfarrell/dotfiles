@@ -1,15 +1,16 @@
 [bar/top]
 enable-ipc = true
 ;bottom = true
-monitor = eDP1
+;monitor = eDP1
+monitor = ${env:MONITOR:}
 width = 100%
-height = 43
-dpi = 192
+height = 30
+;dpi = 96
 
 background = #1f1f1f
 foreground = #eee
 
-line-color = ${bar/bottom.background}
+line-color = ${bar/top.background}
 line-size = 1
 
 padding-left = 0
@@ -28,20 +29,9 @@ separator = |
 ;font-2 = Misc\ Termsynu:size=10;-2
 ;font-3 = FontAwesome:size=9;0
 
-font-0 = NotoSans-Regular:size=9;0
-;font-1 = Material Design Icons:size=11;2
-;font-2 = xos4\ Terminus:size=14;0
-;font-2 = Terminus:size=14;0
-; SIJI doesnt work still, need to install it
-;font-3 = Siji:pixelsize=11;1
-;font-4 = FontAwesome:size=11;0
-;font-5 = Material\-Design\-Iconic\-Font:size=18;2
-;font-0 = Monaco for Powerline:size=10;2
-;font-1 = Material Design Icons:size=18;2
-;font-3 = Material\-Design\-Iconic\-Font:size=18;2
-;font-2 = FontAwesome:size=14;2
-font-1 = FontAwesome:size=11;2
-font-2 = Material\ Icons:size=11;2
+font-0 = NotoSans-Regular:size=10;0
+font-1 = FontAwesome:size=10;2
+font-2 = Material\ Icons:size=10;2
 
 
 ;modules-left = mpd i3 
@@ -67,38 +57,38 @@ overline-color = ${self.background}
 underline-size = 2
 underline-color = ${self.background}
 
-[bar/bottom]
-monitor = HDMI1
-bottom = true
-width = 100%
-height = 40
-dpi = 192
+;[bar/bottom]
+;monitor = HDMI1
+;bottom = true
+;width = 100%
+;height = 40
+;dpi = 192
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
 
-background = ${bar/top.background}
-foreground = ${bar/top.foreground}
+;background = ${bar/top.background}
+;foreground = ${bar/top.foreground}
 
-line-color = ${bar/top.background}
-line-size = 2
+;line-color = ${bar/top.background}
+;line-size = 2
 
-spacing = 3
-padding-right = 4
-module-margin-left = 0 
-module-margin-right = 6
+;spacing = 3
+;padding-right = 4
+;module-margin-left = 0 
+;module-margin-right = 6
 
-;font-0 = NotoSans-Regular:size=10;0
-font-0 = NotoSans-Regular:size=9;0
-font-1 = Material\ Icons:size=11;2
-font-2 = xos4\ Terminus:size=14;0
-font-3 = Siji:pixelsize=11;1
-font-4 = FontAwesome:size=11;0
-font-5 = Material\-Design\-Iconic\-Font:size=18;2
+;;font-0 = NotoSans-Regular:size=10;0
+;font-0 = NotoSans-Regular:size=9;0
+;font-1 = Material\ Icons:size=11;2
+;font-2 = xos4\ Terminus:size=14;0
+;font-3 = Siji:pixelsize=11;1
+;font-4 = FontAwesome:size=11;0
+;font-5 = Material\-Design\-Iconic\-Font:size=18;2
 
 
-modules-left = i3 
-modules-right =   filesystem volume backlight   battery date
+;modules-left = i3 
+;modules-right =   filesystem volume backlight   battery date
 
 [module/backlight]
 type = internal/backlight
@@ -143,8 +133,11 @@ format-discharging =  <ramp-capacity> <label-discharging>
 format-full =  <ramp-capacity> <label-full>
 format-font = 1
 
+time-format = %H:%M
+
 label-charging = %percentage%% %time%h
 label-discharging = %percentage%% %time%h 
+label-full = %percentage%%
 ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
 ramp-capacity-1 = 
