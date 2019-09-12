@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/home/mmmfarrell/.screenlayout/$1.sh
+/home/mmmfarrell/.fehbg
+i3-msg restart

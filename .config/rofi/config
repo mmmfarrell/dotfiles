@@ -1,0 +1,6 @@
+rofi.combi-modi:    window,drun,ssh
+rofi.theme:         monokai
+rofi.font:          System San Francisco Display 12
+rofi.modi:          combi
+rofi.theme: /usr/share/rofi/themes/Monokai.rasi
+rofi.display-combi:   >
