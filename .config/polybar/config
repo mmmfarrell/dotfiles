@@ -353,7 +353,7 @@ label-font = 1
 type = internal/volume
 ;speaker-mixer = Speaker
 ;headphone-mixer = Headphone
-:headphone-id = 9
+;:headphone-id = 9
 
 format-volume = <ramp-volume> <label-volume>
 label-muted =   muted
