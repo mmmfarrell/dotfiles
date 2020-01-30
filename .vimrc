@@ -24,13 +24,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/a.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " Style
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'nvie/vim-flake8'
-Plug 'rhysd/vim-clang-format'
+Plug 'tell-k/vim-autopep8'
+"Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -85,7 +87,7 @@ set ruler
 "set foldmethod=syntax
 
 " 80 character per line
-set textwidth=80
+set textwidth=120
 
 " Highlight one column after limit
 set colorcolumn=+1
@@ -133,7 +135,11 @@ inoremap {<CR> {<CR>}<Esc>ko
 " Use LSP linters
 " Install cquery https://github.com/cquery-project/cquery
 " Install pyls https://github.com/palantir/python-language-server
-let g:ale_linters = {'cpp': ['ccls', 'cpplint'], 'python':['pyls'], 'cmake': ['cmakelint']}
+"let g:ale_linters = {'cpp': ['cquery', 'cpplint'], 'python':['pyls'], 'cmake': ['cmakelint']}
+"let g:ale_linters = {'cpp': ['cquery'], 'python':['pyls'], 'cmake': ['cmakelint']}
+let g:ale_linters = {'cpp': ['ccls'], 'python':['pyls'], 'cmake': ['cmakelint']}
+let g:ale_fixers = {'cpp': ['clang-format'], 'python':['autopep8']}
+let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
@@ -148,6 +154,7 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_echo_cursor = 0
+let g:ale_cpp_ccls_executable = '/home/m/installed_apps/ccls/Release/ccls'
 let g:ale_cpp_ccls_init_options = {
 \   'cache': {
 \       'directory': '/tmp/ccls/cache',
@@ -164,6 +171,9 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 nnoremap <silent> gh :ALEHover<CR>
 nnoremap <silent> gd :ALEGoToDefinition<CR>
 nnoremap <silent> gr :ALEFindReferences<CR>
+nnoremap <silent> ge :ALEDetail<CR>
+nnoremap <leader>aj :ALENext<CR>
+nnoremap <leader>ak :ALEPrevious<CR>
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories=["~/.vim/plugged/vim-snippets/UltiSnips", "/home/mmmfarrell/.vim/UltiSnips"]
@@ -179,11 +189,18 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " if you install vim-operator-user
 "autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
-nmap <Leader>C :ClangFormatAutoToggle<CR>
+"nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 " Vim-ROS
 " Open .h/.cpp in a vsplit
 "command! -nargs=0 AV exec ':vsplit | A'
+" Git Gutter mappings
+nnoremap <leader>gn :GitGutterNextHunk<CR>
+nnoremap <leader>gN :GitGutterPrevHunk<CR>
+nnoremap <leader>gs :GitGutterStageHunk<CR>
+nnoremap <leader>gp :GitGutterPreviewHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
+nnoremap <leader>gb :Gblame<CR>
 
 " FZF
 " leader + f to search files
@@ -192,7 +209,17 @@ nnoremap <leader>f :Files<CR>
 " leader + us (for UltiSnips) to insert a snippet
 nnoremap <leader>s :Snippets<CR>
 " Silver searcher to grep into all files in current path (ignoring .gitignore files)
-nnoremap <leader>ag :Ag<CR>
+
+"Redefine Ag command to allow rg arguments to pass through
+" such as `-tyaml` for yaml files or `-F` for literal strings
+"command! -bang -nargs=* Ag
+  "\ call fzf#vim#grep(
+  "\   'ag --column --line-number --no-heading --color=always --smart-case'.(<q-args>), 1,
+  "\   <bang>0 ? fzf#vim#with_preview('up:60%')
+  "\           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  "\   <bang>0)
+"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <leader>ag :Ag<space>
 
 " NerdTree
 " Start nerdtree if start vim with no file specified
