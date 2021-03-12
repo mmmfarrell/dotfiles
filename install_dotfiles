@@ -1,0 +1,5 @@
+# NOTE this will overwrite the existing files
+ln -s -f ~/dotfiles/.vimrc ~/.vimrc
+ln -s -f ~/dotfiles/.config/i3 ~/.config/i3
+ln -s -f ~/dotfiles/.config/polybar ~/.config/polybar
+ln -s -f ~/dotfiles/.config/rofi ~/.config/rofi
