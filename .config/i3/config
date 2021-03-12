@@ -146,6 +146,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+hide_edge_borders none
+
 # Window colors
 set $border              #282828
 set $bg-color 	         #458588
@@ -190,6 +192,12 @@ bindsym XF86Tools [class="Spotify"] scratchpad show
 # No title bars
 for_window [class="^.*"] border pixel 2
 
+# For gaps
+#for_window [class="^.*"] border pixel 0
+#smart_gaps on
+#gaps inner 10
+#gaps outer 10
+
 # Scratchpad
 bindsym $mod+apostrophe move scratchpad
 bindsym $mod+semicolon [class="Spotify"] scratchpad show
@@ -214,6 +222,27 @@ mode "$mode_system" {
 #bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+Shift+E mode "$mode_system"
 bindsym XF86PowerOff mode "$mode_system"
+
+##
+# move floating windows with keys
+bindsym $mod+m mode "move" focus floating
+mode "move" {
+    bindsym $mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym h     move left
+    bindsym j     move down
+    bindsym k     move up
+    bindsym l     move right
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # Swap caps and ctrl
 exec --no-startup-id xmodmap ~/.xmodmap
@@ -240,8 +269,13 @@ exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/google-chrome; exec /usr
 assign [class="google-chrome"] $ws1
 assign [class="slack"] $ws1
 assign [class="gnome-terminal-server"] $ws2
+assign [class="rviz"] $workspace8
+assign [class="Morpheus"] $workspace9
+for_window [title="Microsoft Teams Notification"] floating enable
+for_window [title="Microsoft Teams Notification"] no_focus
+no_focus [title="Microsoft Teams Notification"]
 
-for_window [class="Morpheus"] floating enable
+#for_window [class="Morpheus"] floating enable
 
 exec --no-startup-id change_display two_monitors
 
@@ -249,3 +283,8 @@ exec --no-startup-id change_display two_monitors
 bindsym $mod+F1 exec change_display ultrawide
 bindsym $mod+F2 exec change_display two_monitors
 bindsym $mod+F10 exec change_display laptop_only
+
+# Screenshot
+bindsym Print       exec flameshot gui
+bindsym Shift+Print exec flameshot full
+bindsym $mod+Shift+p       exec flameshot gui

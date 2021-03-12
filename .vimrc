@@ -7,14 +7,14 @@
 call plug#begin('~/.vim/plugged')
 
 " Typing
-Plug 'w0rp/ale'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'w0rp/ale'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
 "Plug 'taketwo/vim-ros'
 Plug 'lervag/vimtex'
-Plug 'triglav/vim-visual-increment'
+"Plug 'triglav/vim-visual-increment'
 
 " Multi-entry selection UI. FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -25,6 +25,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/a.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'mg979/vim-visual-multi'
 
 " Style
 Plug 'morhetz/gruvbox'
@@ -87,10 +88,10 @@ set ruler
 "set foldmethod=syntax
 
 " 80 character per line
-set textwidth=120
+"set textwidth=120
 
 " Highlight one column after limit
-set colorcolumn=+1
+"set colorcolumn=+1
 
 " spaces everywhere, indents are 4 spaces
 set tabstop=2
@@ -114,14 +115,14 @@ nmap <space> <leader>
 vmap <space> <leader>
 
 " Escape Mappings for insert and visual modes
-inoremap jk <esc>
-vnoremap jk <esc>
+"inoremap jk <esc>
+"vnoremap jk <esc>
 
 " Mappings to move up and down faster
-nnoremap J 10j
-nnoremap K 10k
-vnoremap J 10j
-vnoremap K 10k
+"nnoremap J 10j
+"nnoremap K 10k
+"vnoremap J 10j
+"vnoremap K 10k
 
 " Mappings to edit .vimrc/init.vim and source/save .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -139,7 +140,7 @@ inoremap {<CR> {<CR>}<Esc>ko
 "let g:ale_linters = {'cpp': ['cquery'], 'python':['pyls'], 'cmake': ['cmakelint']}
 let g:ale_linters = {'cpp': ['ccls'], 'python':['pyls'], 'cmake': ['cmakelint']}
 let g:ale_fixers = {'cpp': ['clang-format'], 'python':['autopep8']}
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
@@ -151,7 +152,7 @@ let g:ale_c_parse_compile_commands=1
 "let g:ale_cpp_clangtidy_checks = ['modernize', 'google', 'clang-analyzer', 'performance', 'readability', 'bugprone']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 1
+let g:ale_lint_on_save = 0
 let g:ale_lint_on_enter = 0
 let g:ale_echo_cursor = 0
 let g:ale_cpp_ccls_executable = '/home/m/installed_apps/ccls/Release/ccls'
@@ -218,8 +219,12 @@ nnoremap <leader>s :Snippets<CR>
   "\   <bang>0 ? fzf#vim#with_preview('up:60%')
   "\           : fzf#vim#with_preview('right:50%:hidden', '?'),
   "\   <bang>0)
+function! FZFRawAg(the_tail, ...)
+  return call('fzf#vim#grep', extend(['ag ' . a:the_tail, 1], a:000))
+endfunction
+command! -nargs=+ -complete=file RAg call FZFRawAg(<q-args>)
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-nnoremap <leader>ag :Ag<space>
+nnoremap <leader>ag :RAg<space>
 
 " NerdTree
 " Start nerdtree if start vim with no file specified
@@ -246,6 +251,17 @@ let g:vimtex_view_method = 'zathura'
 " Visual Increment
 " Allows to increment or decrement letters too
 set nrformats=alpha
+
+" vim-visual-multi
+let g:VM_leader            = '\\'
+let g:VM_mouse_mappings    = 1
+let g:VM_theme             = 'iceblue'
+
+let g:VM_maps = {}
+let g:VM_maps["Undo"]      = 'u'
+let g:VM_maps["Redo"]      = '<C-r>'
+let g:VM_maps["Add Cursor Down"] = '<C-j>'
+let g:VM_maps["Add Cursor Up"]   = '<C-k>'
 
 " Load all plugins now, generate help tags, errors and messages ignored
 packloadall
