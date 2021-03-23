@@ -33,7 +33,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'nvie/vim-flake8'
 Plug 'tell-k/vim-autopep8'
-"Plug 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -45,7 +45,7 @@ filetype plugin on
 filetype indent on
 
 " Always copy and paste to clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 " Colorscheme
 set termguicolors
@@ -83,6 +83,9 @@ set magic
 
 " show the cursor position all the time
 set ruler   
+
+" leave end of file as is (newline or not)
+set nofixeol
 
 " fold method syntax automatically folds functions, etc
 "set foldmethod=syntax
