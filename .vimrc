@@ -26,6 +26,8 @@ Plug 'vim-scripts/a.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'mg979/vim-visual-multi'
+Plug 'djoshea/vim-autoread'
+Plug 'danro/rename.vim'
 
 " Style
 Plug 'morhetz/gruvbox'
@@ -165,6 +167,10 @@ let g:ale_cpp_ccls_init_options = {
 \   },
 \ }
 
+"" Autopep8
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+let g:autopep8_disable_show_diff=1
+
 " Show errors in airline status bar
 let g:airline#extensions#ale#enabled = 1
 
@@ -214,20 +220,8 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>s :Snippets<CR>
 " Silver searcher to grep into all files in current path (ignoring .gitignore files)
 
-"Redefine Ag command to allow rg arguments to pass through
-" such as `-tyaml` for yaml files or `-F` for literal strings
-"command! -bang -nargs=* Ag
-  "\ call fzf#vim#grep(
-  "\   'ag --column --line-number --no-heading --color=always --smart-case'.(<q-args>), 1,
-  "\   <bang>0 ? fzf#vim#with_preview('up:60%')
-  "\           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  "\   <bang>0)
-function! FZFRawAg(the_tail, ...)
-  return call('fzf#vim#grep', extend(['ag ' . a:the_tail, 1], a:000))
-endfunction
-command! -nargs=+ -complete=file RAg call FZFRawAg(<q-args>)
-"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-nnoremap <leader>ag :RAg<space>
+command! -bang -nargs=* Ag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <leader>ag :Ag<space>
 
 " NerdTree
 " Start nerdtree if start vim with no file specified
