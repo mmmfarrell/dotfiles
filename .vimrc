@@ -23,6 +23,7 @@ Plug 'junegunn/fzf.vim'
 " Utils
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'mg979/vim-visual-multi'
@@ -114,7 +115,7 @@ autocmd FileType py setlocal ts=4 sw=4 expandtab
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Delete blank lines from end of .h/.cpp files
-function TrimEndLines()
+function! TrimEndLines()
     let save_cursor = getpos(".")
     silent! %s#\($\n\s*\)\+\%$##
     call setpos('.', save_cursor)
