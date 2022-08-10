@@ -16,3 +16,4 @@ set -o vi
 export ROS_IP=d-micfar-01
 export ROS_HOSTNAME=d-micfar-01
 
+. "$HOME/.cargo/env"

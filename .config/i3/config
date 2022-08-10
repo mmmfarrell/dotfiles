@@ -54,10 +54,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+o split h
+#bindsym $mod+o split h
 
 # split in vertical orientation
-bindsym $mod+i split v
+#bindsym $mod+i split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -169,8 +169,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh
 popup_during_fullscreen smart
 
 # Keybindings for brightness Mac
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # lockscreen 
 bindsym $mod+$mod1+l exec $HOME/.config/i3/my_lock.sh
@@ -184,10 +184,10 @@ bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -R
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 # Playerctl stuff
-bindsym XF86AudioPlay exec playerctl play-pause # Play or Pause
-bindsym XF86AudioNext exec playerctl next # Next Song
-bindsym XF86AudioPrev exec playerctl previous # Next Song
-bindsym XF86Tools [class="Spotify"] scratchpad show
+#bindsym XF86AudioPlay exec playerctl play-pause # Play or Pause
+#bindsym XF86AudioNext exec playerctl next # Next Song
+#bindsym XF86AudioPrev exec playerctl previous # Next Song
+#bindsym XF86Tools [class="Spotify"] scratchpad show
 
 # No title bars
 for_window [class="^.*"] border pixel 2
@@ -221,7 +221,7 @@ mode "$mode_system" {
 }
 #bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+Shift+E mode "$mode_system"
-bindsym XF86PowerOff mode "$mode_system"
+#bindsym XF86PowerOff mode "$mode_system"
 
 ##
 # move floating windows with keys
@@ -270,6 +270,14 @@ assign [class="google-chrome"] $ws1
 assign [class="slack"] $ws1
 assign [class="gnome-terminal-server"] $ws2
 assign [class="rviz"] $workspace8
+
+assign [class="vtk"] $workspace8
+assign [class="Bottom"] $workspace8
+assign [class="Forward"] $workspace8
+assign [class="Right"] $workspace8
+assign [class="Left"] $workspace8
+assign [class="MATLAB R2021b"] $workspace9
+
 assign [class="Morpheus"] $workspace9
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Microsoft Teams Notification"] no_focus
