@@ -13,7 +13,7 @@ PS_TIME="\[\033[\$((COLUMNS-10))G\] $BLUE[\T]"
 
 set -o vi
 
-export ROS_IP=d-micfar-01
-export ROS_HOSTNAME=d-micfar-01
+export ROS_IP=$(hostname)
+export ROS_HOSTNAME=$(hostname)
 
 . "$HOME/.cargo/env"
