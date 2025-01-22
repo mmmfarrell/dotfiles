@@ -1,0 +1,4 @@
+polybar
+ltunify
+nerd-fonts
+meld

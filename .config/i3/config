@@ -169,6 +169,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh
 popup_during_fullscreen smart
 
 # Keybindings for brightness Mac
+## Ubuntu use brightnessctl
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
@@ -176,7 +177,8 @@ popup_during_fullscreen smart
 bindsym $mod+$mod1+l exec $HOME/.config/i3/my_lock.sh
 
 # Background stored as wallpaper.png
-exec --no-startup-id feh --bg-scale $HOME/Pictures/shield_wallpaper.png
+#exec --no-startup-id feh --bg-scale $HOME/Pictures/HorseshoeLaJolla.jpg
+exec --no-startup-id feh --bg-scale $HOME/Pictures/HospitalsReef.jpg
 
 # Keybindings for audio up/down and mute Mac 
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
@@ -245,8 +247,11 @@ mode "move" {
 }
 
 # Swap caps and ctrl
-exec --no-startup-id xmodmap ~/.xmodmap
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+exec --no-startup-id xcape -e 'Control_L=Escape'
 
+bindsym $mod+ctrl+j move workspace to output down
+bindsym $mod+ctrl+k move workspace to output up
 bindsym $mod+ctrl+l move workspace to output right
 bindsym $mod+ctrl+h move workspace to output left
 
@@ -260,8 +265,8 @@ workspace_auto_back_and_forth yes
 #exec --no-startup-id i3-sensible-terminal -e tmux attach
 exec --no-startup-id xset r rate 300 20 # Set initial delay 300ms, repeat 20ms
 
-workspace 1 output DP-4
-workspace 2 output DP-2
+#workspace 1 output DP-4
+#workspace 2 output DP-2
 
 #exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/google-chrome; exec /usr/bin/slack'
 #exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal -e tmux attach'
@@ -278,19 +283,22 @@ assign [class="Right"] $workspace8
 assign [class="Left"] $workspace8
 assign [class="MATLAB R2021b"] $workspace9
 
-assign [class="Morpheus"] $workspace9
+#assign [class="Morpheus"] $workspace9
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Microsoft Teams Notification"] no_focus
 no_focus [title="Microsoft Teams Notification"]
 
 #for_window [class="Morpheus"] floating enable
 
-exec --no-startup-id change_display two_monitors
+#exec --no-startup-id change_display two_monitors
 
 # Switching display settings
-bindsym $mod+F1 exec change_display ultrawide
-bindsym $mod+F2 exec change_display two_monitors
-bindsym $mod+F10 exec change_display laptop_only
+bindsym $mod+F1 exec ~/.screenlayout/laptop_only.sh
+bindsym $mod+F2 exec ~/.screenlayout/external_above.sh
+bindsym $mod+F3 exec ~/.screenlayout/ultrawide.sh
+bindsym $mod+F4 exec ~/.screenlayout/dell_ultrawide.sh
+bindsym $mod+F5 exec ~/.screenlayout/laptop_and_two_monitors.sh
+#bindsym $mod+F10 exec change_display laptop_only
 
 # Screenshot
 bindsym Print       exec flameshot gui

@@ -7,7 +7,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Typing
-"Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
@@ -226,6 +226,7 @@ nnoremap <leader>gb :Gblame<CR>
 " FZF
 " leader + f to search files
 " Ctrl+t, Ctrl+x, Ctrl+v to open in tab, split, vsplit
+"nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>f :Files<CR>
 " leader + us (for UltiSnips) to insert a snippet
 nnoremap <leader>s :Snippets<CR>
@@ -233,6 +234,10 @@ nnoremap <leader>s :Snippets<CR>
 
 command! -bang -nargs=* Ag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <leader>ag :Ag<space>
+
+let g:fzf_layout = { 'down': '40%' }
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
+let $FZF_DEFAULT_COMMAND = 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
 " NerdTree
 " Start nerdtree if start vim with no file specified
