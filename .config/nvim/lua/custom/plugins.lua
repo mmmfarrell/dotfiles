@@ -1,6 +1,6 @@
 local plugins = {
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "VeryLazy",
     opts = function()
       return require "custom.configs.null-ls"
@@ -22,6 +22,7 @@ local plugins = {
         "clang-format",
         "typescript-language-server",
         "prettier",
+        "lua-language-server",
         "pyright", -- python lsp (autocomplete, etc)
         "mypy", -- python static checking
         "ruff", -- python static checking

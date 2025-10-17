@@ -154,6 +154,9 @@ export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# vi keybindings on bash prompt
+set -o vi
+
 alias drone='ssh nvidia@192.168.1.122'
 
 export CUDA_VISIBLE_DEVICES=0

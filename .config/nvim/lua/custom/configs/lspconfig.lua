@@ -13,7 +13,7 @@ lspconfig.clangd.setup {
   capabilities = capabilities,
 }
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact" },
   cmd = { "typescript-language-server", "--stdio" }

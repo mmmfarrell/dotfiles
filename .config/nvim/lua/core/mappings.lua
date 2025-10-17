@@ -151,7 +151,7 @@ M.lspconfig = {
       "LSP hover",
     },
 
-    ["gI"] = {
+    ["gi"] = {
       function()
         vim.lsp.buf.implementation()
       end,

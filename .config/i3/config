@@ -27,7 +27,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi to launch programs
-bindsym $mod+d exec rofi -show
+bindsym $mod+d exec rofi -show drun -theme appfetch
 
 # change focus
 bindsym $mod+h focus left
@@ -170,15 +170,15 @@ popup_during_fullscreen smart
 
 # Keybindings for brightness Mac
 ## Ubuntu use brightnessctl
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo /usr/bin/brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo /usr/bin/brightnessctl set 10%-
 
 # lockscreen 
 bindsym $mod+$mod1+l exec $HOME/.config/i3/my_lock.sh
 
 # Background stored as wallpaper.png
 #exec --no-startup-id feh --bg-scale $HOME/Pictures/HorseshoeLaJolla.jpg
-exec --no-startup-id feh --bg-scale $HOME/Pictures/HospitalsReef.jpg
+exec --no-startup-id feh --bg-scale $HOME/Pictures/moon.jpg
 
 # Keybindings for audio up/down and mute Mac 
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
@@ -197,8 +197,8 @@ for_window [class="^.*"] border pixel 2
 # For gaps
 #for_window [class="^.*"] border pixel 0
 #smart_gaps on
-#gaps inner 10
-#gaps outer 10
+gaps inner 5
+gaps outer 5
 
 # Scratchpad
 bindsym $mod+apostrophe move scratchpad
@@ -247,8 +247,8 @@ mode "move" {
 }
 
 # Swap caps and ctrl
-exec --no-startup-id setxkbmap -option ctrl:nocaps
-exec --no-startup-id xcape -e 'Control_L=Escape'
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+exec_always --no-startup-id xcape -e 'Control_L=Escape'
 
 bindsym $mod+ctrl+j move workspace to output down
 bindsym $mod+ctrl+k move workspace to output up
@@ -298,6 +298,7 @@ bindsym $mod+F2 exec ~/.screenlayout/external_above.sh
 bindsym $mod+F3 exec ~/.screenlayout/ultrawide.sh
 bindsym $mod+F4 exec ~/.screenlayout/dell_ultrawide.sh
 bindsym $mod+F5 exec ~/.screenlayout/laptop_and_two_monitors.sh
+bindsym $mod+F6 exec ~/.screenlayout/laptop_and_two_weird.sh
 #bindsym $mod+F10 exec change_display laptop_only
 
 # Screenshot
